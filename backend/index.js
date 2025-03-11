@@ -14,19 +14,31 @@ app.get("/", (req, res) => {
     res.send(process.env.TMDB_API_TOKEN);
 });
 
-// GET /movies/search?query={searchTerm} - Search for movies
-//      --url 'https://api.themoviedb.org/3/search/movie?query=pokemon&include_adult=false&language=en-US&page=1' \
+// Search for movies
 app.get("/api/movies/search", async (req, res) => {
-    let response = await axios.get(
-        `https://api.themoviedb.org/3/search/movie?query=pokemon&include_adult=false&language=en-US`,
-        {
-            headers: {
-                Authorization: `Bearer ${process.env.TMDB_API_TOKEN}`,
-            },
-        }
-    );
-    console.log(response);
-    res.send("/api/movies/search");
+    if (!req.query.query) {
+        return res
+            .status(400)
+            .json({ error: "Missing required parameter: query" });
+    }
+    try {
+        let query = req.query.query;
+        let response = await axios.get(
+            `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US`,
+            {
+                headers: {
+                    Authorization: `Bearer ${process.env.TMDB_API_TOKEN}`,
+                },
+            }
+        );
+        console.log(response.data);
+        res.send("/api/movies/search");
+    } catch (error) {
+        return res.status(500).json({
+            error: "Failed to fetch movie data",
+            message: error.message,
+        });
+    }
 });
 
 const PORT = 8080;

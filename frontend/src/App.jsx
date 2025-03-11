@@ -1,16 +1,15 @@
-import { useState } from "react";
+import React from "react";
+import "./app.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "../components/Home";
-import "./app.css";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Navbar from "../components/Navbar";
 
 function App() {
-    const [darkMode, setDarkMode] = useState(true);
+    const [darkMode, setDarkMode] = React.useState(true);
 
     const toggleDarkMode = () => {
-        console.log("toggleDarkmode clicked");
         setDarkMode((prevMode) => !prevMode);
     };
 

@@ -3,14 +3,13 @@ import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
-import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import { Link } from "react-router-dom";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
+import { IconButton, Tooltip } from "@mui/material";
 
 const Search = styled("div")(({ theme }) => ({
     position: "relative",
@@ -73,14 +72,23 @@ export default function Navbar(props) {
                         </Link>
                     </Typography>
                     {props.darkMode ? (
-                        <LightModeIcon
-                            onClick={props.toggleDarkMode}
-                        ></LightModeIcon>
+                        <Tooltip title="Light Mode">
+                            <IconButton>
+                                <LightModeIcon
+                                    onClick={props.toggleDarkMode}
+                                ></LightModeIcon>
+                            </IconButton>
+                        </Tooltip>
                     ) : (
-                        <DarkModeIcon
-                            onClick={props.toggleDarkMode}
-                        ></DarkModeIcon>
+                        <Tooltip title="Dark Mode">
+                            <IconButton>
+                                <DarkModeIcon
+                                    onClick={props.toggleDarkMode}
+                                ></DarkModeIcon>
+                            </IconButton>
+                        </Tooltip>
                     )}
+
                     <Search>
                         <SearchIconWrapper>
                             <SearchIcon />

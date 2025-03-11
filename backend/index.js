@@ -14,7 +14,29 @@ app.get("/", (req, res) => {
     res.send(process.env.TMDB_API_TOKEN);
 });
 
+// Get trending movies
+// https://developer.themoviedb.org/reference/trending-movies
+app.get("/api/movies/trending", async (req, res) => {
+    try {
+        let response = await axios.get(
+            "https://api.themoviedb.org/3/trending/movie/day?language=en-US",
+            {
+                headers: {
+                    Authorization: `Bearer ${process.env.TMDB_API_TOKEN}`,
+                },
+            }
+        );
+        res.send(response.data);
+    } catch (error) {
+        res.status(500).json({
+            error: "Failed to fetch trending movie data",
+            message: error.message,
+        });
+    }
+});
+
 // Search for movies
+// https://developer.themoviedb.org/reference/search-movie
 app.get("/api/movies/search", async (req, res) => {
     if (!req.query.query) {
         return res
@@ -31,8 +53,7 @@ app.get("/api/movies/search", async (req, res) => {
                 },
             }
         );
-        console.log(response.data);
-        res.send("/api/movies/search");
+        res.send(response.data);
     } catch (error) {
         return res.status(500).json({
             error: "Failed to fetch movie data",

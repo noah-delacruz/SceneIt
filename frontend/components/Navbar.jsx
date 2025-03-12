@@ -53,7 +53,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-export default function Navbar(props) {
+export default function Navbar({ darkMode, toggleDarkMode }) {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
@@ -71,11 +71,11 @@ export default function Navbar(props) {
                             HOME
                         </Link>
                     </Typography>
-                    {props.darkMode ? (
+                    {darkMode ? (
                         <Tooltip title="Light Mode">
                             <IconButton>
                                 <LightModeIcon
-                                    onClick={props.toggleDarkMode}
+                                    onClick={toggleDarkMode}
                                 ></LightModeIcon>
                             </IconButton>
                         </Tooltip>
@@ -83,7 +83,7 @@ export default function Navbar(props) {
                         <Tooltip title="Dark Mode">
                             <IconButton>
                                 <DarkModeIcon
-                                    onClick={props.toggleDarkMode}
+                                    onClick={toggleDarkMode}
                                 ></DarkModeIcon>
                             </IconButton>
                         </Tooltip>

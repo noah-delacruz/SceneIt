@@ -4,8 +4,8 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
 
-export default function MovieCard(props) {
-    console.log(props.movie);
+export default function MovieCard({ movie }) {
+    console.log(movie);
     return (
         <>
             <Card sx={{ maxWidth: 350 }}>
@@ -13,18 +13,18 @@ export default function MovieCard(props) {
                     <CardMedia
                         component="img"
                         height={{ width: "100%" }}
-                        image={`https://image.tmdb.org/t/p/w500/${props.movie.backdrop_path}`}
-                        alt={props.movie.title}
+                        image={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
+                        alt={movie.title}
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h6" component="div">
-                            {props.movie.title}
+                            {movie.title}
                         </Typography>
                         <Typography
                             variant="body2"
                             sx={{ color: "text.secondary" }}
                         >
-                            {props.movie.release_date.split("-")[0]}
+                            {movie.release_date.split("-")[0]}
                         </Typography>
                     </CardContent>
                 </CardActionArea>

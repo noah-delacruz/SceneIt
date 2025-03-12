@@ -1,6 +1,6 @@
 import MovieList from "./MovieList";
 
-export default function Home(props) {
+export default function Home() {
     return (
         <>
             <MovieList />

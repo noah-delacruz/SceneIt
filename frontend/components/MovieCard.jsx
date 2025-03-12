@@ -8,7 +8,7 @@ export default function MovieCard(props) {
     console.log(props.movie);
     return (
         <>
-            <Card sx={{ maxWidth: 300 }}>
+            <Card sx={{ maxWidth: 350 }}>
                 <CardActionArea>
                     <CardMedia
                         component="img"

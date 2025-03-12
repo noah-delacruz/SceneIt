@@ -54,6 +54,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Navbar({ darkMode, toggleDarkMode }) {
+    const [searchTerm, setSearchTerm] = React.useState("");
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log("submitted");
+    };
+
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
@@ -89,15 +96,21 @@ export default function Navbar({ darkMode, toggleDarkMode }) {
                         </Tooltip>
                     )}
 
-                    <Search>
-                        <SearchIconWrapper>
-                            <SearchIcon />
-                        </SearchIconWrapper>
-                        <StyledInputBase
-                            placeholder="Search…"
-                            inputProps={{ "aria-label": "search" }}
-                        />
-                    </Search>
+                    <form onSubmit={handleSubmit}>
+                        <Search>
+                            <SearchIconWrapper>
+                                <SearchIcon />
+                            </SearchIconWrapper>
+                            <StyledInputBase
+                                placeholder="Search…"
+                                inputProps={{ "aria-label": "search" }}
+                                value={searchTerm}
+                                onChange={(e) => {
+                                    setSearchTerm(e.target.value);
+                                }}
+                            />
+                        </Search>
+                    </form>
                 </Toolbar>
             </AppBar>
         </Box>

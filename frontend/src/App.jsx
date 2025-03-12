@@ -5,6 +5,7 @@ import Home from "../components/Home";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 function App() {
     const [darkMode, setDarkMode] = React.useState(true);
@@ -27,6 +28,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                 </Routes>
+                <Footer />
             </BrowserRouter>
         </ThemeProvider>
     );

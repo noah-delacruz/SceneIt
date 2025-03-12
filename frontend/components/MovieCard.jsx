@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
 
 export default function MovieCard({ movie }) {
-    console.log(movie);
+    // console.log(movie);
     return (
         <>
             <Card sx={{ maxWidth: 350 }}>

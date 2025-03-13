@@ -1,5 +1,6 @@
 import express from "express";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 import User from "../models/userModel.js";
 
 const router = express.Router();
@@ -38,7 +39,10 @@ router.post("/api/users", async (req, res) => {
     }
 
     res.json({
+        _id: user.id,
         email: user.email,
+        favorites: user.favorites,
+        token: generateToken(user._id),
     });
 });
 
@@ -63,12 +67,22 @@ router.post("/api/users/login", async (req, res) => {
     const passwordIsCorrect = await bcrypt.compare(password, user.password);
     if (user && passwordIsCorrect) {
         return res.json({
+            _id: user.id,
             email: user.email,
+            favorites: user.favorites,
+            token: generateToken(user._id),
         });
     }
     return res.status(400).json({
         error: "Invalid credentials",
     });
 });
+
+// Generate JsonWebToken
+const generateToken = (id) => {
+    return jwt.sign({ id }, process.env.JWT_SECRET, {
+        expiresIn: "30d",
+    });
+};
 
 export default router;

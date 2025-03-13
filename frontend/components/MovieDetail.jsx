@@ -1,3 +1,4 @@
+import React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -77,12 +78,11 @@ export default function MovieDetail() {
                                     }}
                                 />
                             ))} */}
-                            <Typography
-                                gutterBottom
-                                variant="h3"
-                                component="div"
-                            >
+                            <Typography variant="h3" component="div">
                                 {movie.title}
+                            </Typography>
+                            <Typography variant="body1" sx={{ pt: 1 }}>
+                                {formatDate(movie.release_date)}
                             </Typography>
                         </Container>
                     </Grid2>

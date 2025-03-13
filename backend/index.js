@@ -66,6 +66,31 @@ app.get("/api/movies/search", async (req, res) => {
     }
 });
 
+app.get("/api/movie/:id", async (req, res) => {
+    let { id } = req.params;
+    if (!id) {
+        return res
+            .status(400)
+            .json({ error: "Missing required parameter: movie id" });
+    }
+    try {
+        let response = await axios.get(
+            `https://api.themoviedb.org/3/movie/${id}?language=en-US`,
+            {
+                headers: {
+                    Authorization: `Bearer ${process.env.TMDB_API_TOKEN}`,
+                },
+            }
+        );
+        res.send(response.data);
+    } catch (error) {
+        return res.status(500).json({
+            error: "Failed to fetch singular movie data",
+            message: error.message,
+        });
+    }
+});
+
 const PORT = 8080;
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);

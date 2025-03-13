@@ -18,7 +18,6 @@ export default function MovieList({ movieRoute, searchQuery, page }) {
                 }
 
                 const response = await axios.get(movieRoute, { params });
-                console.log(response.data);
                 setMovies(response.data.results);
 
                 if (searchQuery) {

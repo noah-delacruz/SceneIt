@@ -5,12 +5,16 @@ import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
 import { useNavigate } from "react-router-dom";
 import { formatDate } from "./helperFunctions";
+import axios from "axios";
 
 export default function MovieCard({ movie }) {
     const navigate = useNavigate();
-    const handleClick = () => {
-        console.log(movie);
-        navigate("/details", { state: { movie } });
+    const handleClick = async () => {
+        // Get detailed movie info to pass on to MovieDetail component
+        const response = await axios.get(
+            `http://localhost:8080/api/movie/${movie.id}`
+        );
+        navigate("/details", { state: { movie: response.data } });
     };
 
     return (

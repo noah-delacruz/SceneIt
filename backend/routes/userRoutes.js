@@ -132,6 +132,38 @@ router.post("/api/users/favorites", protect, async (req, res) => {
     }
 });
 
+// Remove movie from user's favorites
+router.delete("/api/users/favorites", protect, async (req, res) => {
+    const user = await User.findById(req.user.id);
+    if (!user) {
+        return res.status(400).json({ message: "User not found" });
+    }
+
+    const { movie } = req.body;
+    if (!movie) {
+        return res.status(400).json({ message: "Movie data missing" });
+    }
+
+    const isMovieFavorited = user.favorites.find(
+        (currMovie) => currMovie.id === movie.id
+    );
+    if (!isMovieFavorited) {
+        return res.status(400).json({
+            message: "Movie cannot be removed because it is not in favorites",
+        });
+    }
+
+    user.favorites = user.favorites.filter(
+        (currMovie) => currMovie.id !== movie.id
+    );
+    await user.save();
+
+    res.status(201).json({
+        message: "Movie removed from favorites",
+        favorites: user.favorites,
+    });
+});
+
 // Generate JsonWebToken
 const generateToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, {

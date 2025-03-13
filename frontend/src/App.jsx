@@ -28,7 +28,7 @@ function App() {
                 <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path="/search-results" element={<SearchPage />} />
+                    <Route path="/results" element={<SearchPage />} />
                 </Routes>
                 <Footer />
             </BrowserRouter>

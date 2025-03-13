@@ -11,7 +11,7 @@ export default function SearchBar() {
         e.preventDefault();
         console.log("Searching for movieTitle: " + searchTerm);
 
-        navigate("/search-results", { state: { searchTerm } });
+        navigate("/results", { state: { searchTerm } });
     };
 
     return (

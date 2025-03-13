@@ -3,15 +3,24 @@ import axios from "axios";
 import MovieCard from "./MovieCard";
 import { Box } from "@mui/material";
 
-export default function MovieList({ movieRoute }) {
+export default function MovieList({ movieRoute, searchQuery }) {
     const [movies, setMovies] = React.useState([]);
+    console.log(searchQuery);
 
     React.useEffect(() => {
         async function getMovies() {
             try {
-                let response = await axios.get(movieRoute);
-                // console.log(response.data);
-                setMovies(response.data.results);
+                if (searchQuery === "") {
+                    let response = await axios.get(movieRoute);
+                    // console.log(response.data);
+                    setMovies(response.data.results);
+                } else {
+                    let response = await axios.get(movieRoute, {
+                        params: { query: searchQuery },
+                    });
+                    // console.log(response.data);
+                    setMovies(response.data.results);
+                }
             } catch (error) {
                 console.error("Error fetching movies:", error);
             }

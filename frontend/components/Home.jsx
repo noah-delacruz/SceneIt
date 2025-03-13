@@ -7,7 +7,10 @@ export default function Home() {
             <Typography textAlign="center" variant="h3" sx={{ pt: 1 }}>
                 Trending Movies
             </Typography>
-            <MovieList movieRoute="http://localhost:8080/api/movies/trending" />
+            <MovieList
+                movieRoute="http://localhost:8080/api/movies/trending"
+                searchQuery=""
+            />
         </>
     );
 }

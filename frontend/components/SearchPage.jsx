@@ -7,7 +7,10 @@ export default function SearchPage() {
     console.log(searchTerm);
     return (
         <>
-            <MovieList movieRoute="http://localhost:8080/api/movies/trending" />
+            <MovieList
+                movieRoute="http://localhost:8080/api/movies/search"
+                searchQuery={searchTerm}
+            />
         </>
     );
 }

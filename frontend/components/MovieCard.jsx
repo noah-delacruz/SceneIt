@@ -32,7 +32,6 @@ export default function MovieCard({ movie }) {
         // Return the formatted date string
         return `${month} ${day}, ${year}`;
     };
-    console.log(movie.backdrop_path);
     return (
         <>
             <Card sx={{ maxWidth: 350 }}>

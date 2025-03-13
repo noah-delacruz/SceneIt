@@ -69,6 +69,7 @@ export const formatDate = (dateString) => {
     return `${month} ${day}, ${year}`;
 };
 
+// For MovieCard.jsx and MovieDetail.jsx
 export const getImageUrl = (path) =>
     path
         ? `https://image.tmdb.org/t/p/w500/${path}`

@@ -54,9 +54,9 @@ export default function MovieList({ movieRoute, searchQuery, page }) {
                     padding: 2,
                 }}
             >
-                {movies.map((movie) => {
-                    return <MovieCard key={movie.id} movie={movie} />;
-                })}
+                {movies.map((movie) => (
+                    <MovieCard key={movie.id} movie={movie} />
+                ))}
             </Box>
             <Box
                 justifyContent={"center"}
@@ -66,9 +66,7 @@ export default function MovieList({ movieRoute, searchQuery, page }) {
                 {totalSearchResults === -1
                     ? ""
                     : `${totalSearchResults} results`}
-                {totalPages === -1 ? (
-                    ""
-                ) : (
+                {totalPages > 1 && (
                     <Pagination
                         count={totalPages}
                         onChange={handlePageChange}

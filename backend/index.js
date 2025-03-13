@@ -66,6 +66,8 @@ app.get("/api/movies/search", async (req, res) => {
     }
 });
 
+// Get details of a single movie
+// https://developer.themoviedb.org/reference/movie-details
 app.get("/api/movie/:id", async (req, res) => {
     let { id } = req.params;
     if (!id) {

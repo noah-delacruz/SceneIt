@@ -23,9 +23,6 @@ function App() {
                 main: "#6171AF", // blue purple color for light mode
             },
         },
-        // typography: {
-        //     fontFamily: "'Inter', sans-serif",
-        // },
     });
 
     return (

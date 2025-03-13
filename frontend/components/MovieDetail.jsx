@@ -1,12 +1,5 @@
 import React from "react";
-import {
-    Box,
-    CardMedia,
-    Container,
-    Grid,
-    Paper,
-    Typography,
-} from "@mui/material";
+import { Box, CardMedia, Container, Grid, Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { formatDate, getImageUrl } from "./helperFunctions";
 

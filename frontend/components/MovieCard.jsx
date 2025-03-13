@@ -9,12 +9,17 @@ import axios from "axios";
 
 export default function MovieCard({ movie }) {
     const navigate = useNavigate();
+
     const handleClick = async () => {
-        // Get detailed movie info to pass on to MovieDetail component
-        const response = await axios.get(
-            `http://localhost:8080/api/movie/${movie.id}`
-        );
-        navigate("/details", { state: { movie: response.data } });
+        try {
+            // Get detailed movie info to pass on to MovieDetail component
+            const response = await axios.get(
+                `http://localhost:8080/api/movie/${movie.id}`
+            );
+            navigate("/details", { state: { movie: response.data } });
+        } catch (error) {
+            console.error("Failed to fetch movie details: ", error);
+        }
     };
 
     return (

@@ -134,7 +134,31 @@ app.post("/api/users", async (req, res) => {
 
 // Authenticate a user
 app.post("/api/users/login", async (req, res) => {
-    res.json({ message: "Login a user" });
+    const { email, password } = req.body;
+    if (!email || !password) {
+        return res.status(400).json({
+            error: "Missing required parameters: email and/or password",
+        });
+    }
+
+    // Check if users email is registered
+    const user = await User.findOne({ email });
+    if (!user) {
+        return res.status(400).json({
+            error: "User not registered",
+        });
+    }
+
+    // Compare what user inputted for password vs hashed password in the DB
+    const passwordIsCorrect = await bcrypt.compare(password, user.password);
+    if (user && passwordIsCorrect) {
+        return res.json({
+            email: user.email,
+        });
+    }
+    return res.status(400).json({
+        error: "Invalid credentials",
+    });
 });
 
 // // Get all of user's favorited movies

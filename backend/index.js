@@ -4,6 +4,8 @@ import axios from "axios";
 import dotenv from "dotenv";
 import { connectToDB } from "./db.js";
 import User from "./models/userModel.js";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
 
 dotenv.config();
 connectToDB();
@@ -91,6 +93,64 @@ app.get("/api/movie/:id", async (req, res) => {
         });
     }
 });
+
+// Register new user
+app.post("/api/users", async (req, res) => {
+    const { email, password } = req.body;
+    if (!email || !password) {
+        return res.status(400).json({
+            error: "Missing required parameters: email and/or password",
+        });
+    }
+
+    // Check if user already exists
+    const userExists = await User.findOne({ email });
+    if (userExists) {
+        return res.status(400).json({
+            error: "User already exists",
+        });
+    }
+
+    // Hash password via bcrypt
+    const salt = await bcrypt.genSalt();
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    // Create user
+    const user = await User.create({
+        email,
+        password: hashedPassword,
+        favorites: [{}],
+    });
+    if (!user) {
+        return res.status(400).json({
+            error: "Invalid user data",
+        });
+    }
+
+    res.json({
+        email: user.email,
+    });
+});
+
+// Authenticate a user
+app.post("/api/users/login", async (req, res) => {
+    res.json({ message: "Login a user" });
+});
+
+// // Get all of user's favorited movies
+// app.get("/api/favorites", async (req, res) => {
+//     const user = await User.find();
+//     res.send(user);
+// });
+
+// app.post("/api/favorites", async (req, res) => {
+//     if (!req.body.user) {
+//         return res
+//             .status(400)
+//             .json({ error: "Missing required parameter: user" });
+//     }
+//     const user = await User;
+// });
 
 const PORT = 8080;
 app.listen(PORT, () => {

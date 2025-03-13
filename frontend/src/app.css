@@ -3,6 +3,11 @@
     color: inherit;
 }
 
+.no-link-style:hover {
+    text-decoration: none;
+    color: lightgray;
+}
+
 .movie-description {
     display: -webkit-box;
     -webkit-line-clamp: 2;

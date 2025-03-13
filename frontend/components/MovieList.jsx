@@ -72,7 +72,6 @@ export default function MovieList({ movieRoute, searchQuery, page }) {
                 ) : (
                     <Pagination
                         count={totalPages}
-                        // count={Math.ceil(totalSearchResults / 10)}
                         onChange={handlePageChange}
                     />
                 )}

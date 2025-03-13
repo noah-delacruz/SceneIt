@@ -7,6 +7,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import SearchPage from "../components/SearchPage";
+import MovieDetail from "../components/MovieDetail";
 
 function App() {
     const [darkMode, setDarkMode] = React.useState(true);
@@ -29,6 +30,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/results" element={<SearchPage />} />
+                    <Route path="details" element={<MovieDetail />} />
                 </Routes>
                 <Footer />
             </BrowserRouter>

@@ -3,36 +3,19 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
+import { useNavigate } from "react-router-dom";
+import { formatDate } from "./helperFunctions";
 
 export default function MovieCard({ movie }) {
-    const formatDate = (dateString) => {
-        const date = new Date(dateString);
-
-        const months = [
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec",
-        ];
-
-        const month = months[date.getMonth()];
-        const day = date.getDate();
-        const year = date.getFullYear();
-
-        return `${month} ${day}, ${year}`;
+    const navigate = useNavigate();
+    const handleClick = () => {
+        console.log(movie);
+        navigate("/details", { state: { movie } });
     };
 
     return (
         <>
-            <Card sx={{ maxWidth: 350 }}>
+            <Card sx={{ maxWidth: 350 }} onClick={handleClick}>
                 <CardActionArea>
                     <CardMedia
                         component="img"

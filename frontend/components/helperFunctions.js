@@ -1,4 +1,4 @@
-// Below is from Material UI docs
+// First 3 functions are from Material UI docs for Navbar.jsx
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 
@@ -42,3 +42,29 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
         },
     },
 }));
+
+// For MovieCard.jsx and MovieDetail.jsx
+export const formatDate = (dateString) => {
+    const date = new Date(dateString);
+
+    const months = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+    ];
+
+    const month = months[date.getMonth()];
+    const day = date.getDate();
+    const year = date.getFullYear();
+
+    return `${month} ${day}, ${year}`;
+};

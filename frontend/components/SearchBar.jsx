@@ -1,5 +1,5 @@
 import React from "react";
-import { Search, SearchIconWrapper, StyledInputBase } from "./NavbarStyles";
+import { Search, SearchIconWrapper, StyledInputBase } from "./helperFunctions";
 import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
 

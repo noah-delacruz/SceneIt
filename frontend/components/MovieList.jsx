@@ -3,7 +3,7 @@ import axios from "axios";
 import MovieCard from "./MovieCard";
 import { Box, Pagination } from "@mui/material";
 
-export default function MovieList({ movieRoute, searchQuery }) {
+export default function MovieList({ movieRoute, searchQuery, page }) {
     const [movies, setMovies] = React.useState([]);
     const [totalSearchResults, setTotalSearchResults] = React.useState(-1);
     const [totalPages, setTotalPages] = React.useState(-1);
@@ -18,7 +18,7 @@ export default function MovieList({ movieRoute, searchQuery }) {
                 }
 
                 const response = await axios.get(movieRoute, { params });
-
+                console.log(response.data);
                 setMovies(response.data.results);
 
                 if (searchQuery) {
@@ -35,22 +35,13 @@ export default function MovieList({ movieRoute, searchQuery }) {
 
     // Handle pagination changes and fetch new results
     const handlePageChange = async (e, page) => {
-        console.log(e, page);
-        // try {
-        //     const response = await axios.get(
-        //         `http://localhost:3000/searchMovieByTitle/${searchValue}/${page}`
-        //     );
-        //     console.log(response.data);
-        //     navigate("/searchResults", {
-        //         state: {
-        //             searchResults: Object.entries(response.data.results),
-        //             responseData: response.data,
-        //             searchValue,
-        //         },
-        //     });
-        // } catch (error) {
-        //     console.error("Error getting new page data:", error);
-        // }
+        try {
+            let params = { query: searchQuery, page };
+            const response = await axios.get(movieRoute, { params });
+            setMovies(response.data.results);
+        } catch (error) {
+            console.error("Error getting new page data: ", error);
+        }
     };
 
     return (
@@ -81,6 +72,7 @@ export default function MovieList({ movieRoute, searchQuery }) {
                 ) : (
                     <Pagination
                         count={totalPages}
+                        // count={Math.ceil(totalSearchResults / 10)}
                         onChange={handlePageChange}
                     />
                 )}

@@ -9,9 +9,9 @@ export default function SearchBar() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Searching for movieTitle: " + searchTerm);
+        // console.log("Searching for movieTitle: " + searchTerm);
 
-        navigate("/results", { state: { searchTerm } });
+        navigate("results", { state: { searchTerm } });
     };
 
     return (

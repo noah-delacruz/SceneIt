@@ -1,6 +1,6 @@
 # SceneIt
 
-A prototype application that allows users to search for movies by name using The Movie Database (TMDB) API
+A prototype application that allows users to search for movies using The Movie Database (TMDB) API
 
 [PLACE IMAGE HERE]
 

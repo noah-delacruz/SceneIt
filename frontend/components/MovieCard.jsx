@@ -4,7 +4,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
 import { useNavigate } from "react-router-dom";
-import { formatDate } from "./helperFunctions";
+import { formatDate, getImageUrl } from "./helperFunctions";
 import axios from "axios";
 
 export default function MovieCard({ movie }) {
@@ -23,11 +23,7 @@ export default function MovieCard({ movie }) {
                 <CardActionArea>
                     <CardMedia
                         component="img"
-                        image={
-                            movie.backdrop_path
-                                ? `https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`
-                                : "https://image.tmdb.org/t/p/w500//4Xt8k4e6L1Zq2ykA6y2f3k2DDhR.jpg"
-                        }
+                        image={getImageUrl(movie.backdrop_path)}
                         alt={movie.title}
                     />
                     <CardContent>

@@ -19,7 +19,13 @@ function App() {
     const darkTheme = createTheme({
         palette: {
             mode: darkMode ? "dark" : "light",
+            primary: {
+                main: "#6171AF", // blue purple color for light mode
+            },
         },
+        // typography: {
+        //     fontFamily: "'Inter', sans-serif",
+        // },
     });
 
     return (

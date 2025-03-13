@@ -1,118 +1,80 @@
 import React from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import CardActionArea from "@mui/material/CardActionArea";
+import {
+    Box,
+    CardMedia,
+    Container,
+    Grid,
+    Paper,
+    Typography,
+} from "@mui/material";
 import { useLocation } from "react-router-dom";
-import { formatDate } from "./helperFunctions";
-import { Box, Container, Grid2, Paper } from "@mui/material";
+import { formatDate, getImageUrl } from "./helperFunctions";
 
 export default function MovieDetail() {
     const location = useLocation();
     const { movie } = location.state || {};
     console.log(movie);
 
+    if (!movie) {
+        return (
+            <Typography variant="h5">Movie details not available</Typography>
+        );
+    }
+
+    const convertRuntime = (minutes) => {
+        if (!minutes) return "Unknown duration";
+        const hours = Math.floor(minutes / 60);
+        const mins = minutes % 60;
+        return `${hours}h ${mins}m`;
+    };
+
     return (
-        <>
-            {/* <CardMedia
-                sx={{ maxWidth: 350 }}
-                component="img"
-                image={
-                    movie.backdrop_path
-                        ? `https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`
-                        : "https://image.tmdb.org/t/p/w500//4Xt8k4e6L1Zq2ykA6y2f3k2DDhR.jpg"
-                }
-                alt={movie.title}
-            />
-            <Card sx={{ maxWidth: 350 }}>
-                <CardActionArea>
-                    <CardContent>
-                        <Typography gutterBottom variant="h6" component="div">
-                            {movie.title}
+        <Box sx={{ flexGrow: 1 }}>
+            <Grid container spacing={2}>
+                <Grid item xs={12} sm={4} md={3}>
+                    <CardMedia
+                        component="img"
+                        image={getImageUrl(movie.poster_path)}
+                        alt={movie.title}
+                        sx={{ width: "100%", borderRadius: 2 }}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={8} md={9}>
+                    <Container sx={{ py: 3 }}>
+                        <Typography variant="h3">{movie.title}</Typography>
+                        <Typography variant="body1" sx={{ pt: 1 }}>
+                            {formatDate(movie.release_date)} •{" "}
+                            {movie.genres
+                                ?.map((genre) => genre.name)
+                                .join(", ")}{" "}
+                            • {convertRuntime(movie.runtime)}
                         </Typography>
-                        <Typography
-                            variant="body4"
-                            sx={{ color: "text.disabled", pb: 2 }}
-                        >
-                            {formatDate(movie.release_date)}
+                        <Typography variant="body1" sx={{ pt: 1 }}>
+                            {movie.vote_average
+                                ? `${movie.vote_average * 10}% User Score`
+                                : "No rating available"}
                         </Typography>
-                        <Typography
-                            variant="body2"
-                            sx={{ color: "text.secondary" }}
-                            className="movie-description"
-                        >
+                        {movie.tagline && (
+                            <Typography
+                                variant="body1"
+                                sx={{
+                                    pt: 1,
+                                    fontStyle: "italic",
+                                    color: "text.secondary",
+                                }}
+                            >
+                                {movie.tagline}
+                            </Typography>
+                        )}
+                        <Typography variant="h5" sx={{ pt: 1 }}>
+                            Overview
+                        </Typography>
+                        <Typography variant="body1">
                             {movie.overview}
                         </Typography>
-                    </CardContent>
-                </CardActionArea>
-            </Card> */}
-            <Box
-                sx={{
-                    flexGrow: 1,
-                }}
-            >
-                <Grid2 container>
-                    <Grid2 size={3}>
-                        <CardMedia
-                            component="img"
-                            image={
-                                movie.poster_path
-                                    ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
-                                    : "https://image.tmdb.org/t/p/w500//4Xt8k4e6L1Zq2ykA6y2f3k2DDhR.jpg"
-                            }
-                            alt={movie.title}
-                        />
-                    </Grid2>
-                    <Grid2 size={8}>
-                        <Container sx={{ py: 3 }}>
-                            {/* Three horizontal lines */}
-                            {/* {[1, 2, 3].map((item) => (
-                                <Paper
-                                    key={item}
-                                    sx={{
-                                        height: "4px",
-                                        width: "100%",
-                                        backgroundColor: "white",
-                                        my: 3,
-                                    }}
-                                />
-                            ))} */}
-                            <Typography variant="h3" component="div">
-                                {movie.title}
-                            </Typography>
-                            <Typography variant="body1" sx={{ pt: 1 }}>
-                                {formatDate(movie.release_date)}
-                            </Typography>
-                        </Container>
-                    </Grid2>
-                </Grid2>
-            </Box>
-        </>
+                    </Container>
+                </Grid>
+            </Grid>
+        </Box>
     );
 }
-
-/*
-
-{
-    "backdrop_path": "/GtWV2PAAFZYYHAy788RI6xOMJ8.jpg",
-    "id": 610219,
-    "title": "The Fire Inside",
-    "original_title": "The Fire Inside",
-    "overview": "Claressa Shields, a high school junior from Flint, Michigan, aided by her tough-love coach, Jason Crutchfield, pushes past all limitations to become the first American woman to win an Olympic gold medal in boxing. But even at the pinnacle of success, Claressa has to reckon with the fact that not all dreams are created equal, and the real fight has only just begun.",
-    "poster_path": "/dMorkoCdZJ1xmKv0VAXcpUax6Ar.jpg",
-    "media_type": "movie",
-    "adult": false,
-    "original_language": "en",
-    "genre_ids": [
-        36,
-        18
-    ],
-    "popularity": 1.485,
-    "release_date": "2024-12-25",
-    "video": false,
-    "vote_average": 6.8,
-    "vote_count": 23
-}
-
-*/

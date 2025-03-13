@@ -68,3 +68,8 @@ export const formatDate = (dateString) => {
 
     return `${month} ${day}, ${year}`;
 };
+
+export const getImageUrl = (path) =>
+    path
+        ? `https://image.tmdb.org/t/p/w500/${path}`
+        : "https://image.tmdb.org/t/p/w500//4Xt8k4e6L1Zq2ykA6y2f3k2DDhR.jpg";

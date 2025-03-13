@@ -2,19 +2,18 @@ import express from "express";
 import cors from "cors";
 import axios from "axios";
 import dotenv from "dotenv";
+import { connectToDB } from "./db.js";
+import User from "./models/userModel.js";
 
 dotenv.config();
+connectToDB();
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => {
-    res.send(process.env.TMDB_API_TOKEN);
-});
-
-// Get trending movies
+// Get trending movies for the day
 // https://developer.themoviedb.org/reference/trending-movies
 app.get("/api/movies/trending", async (req, res) => {
     try {

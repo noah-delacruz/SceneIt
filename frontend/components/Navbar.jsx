@@ -24,7 +24,7 @@ export default function Navbar({ darkMode, toggleDarkMode }) {
                         }}
                     >
                         <Link to="/" className="no-link-style">
-                            HOME
+                            SceneIt
                         </Link>
                     </Typography>
                     {darkMode ? (

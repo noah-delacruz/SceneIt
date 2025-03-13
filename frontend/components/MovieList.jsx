@@ -1,35 +1,57 @@
 import React from "react";
 import axios from "axios";
 import MovieCard from "./MovieCard";
-import { Box } from "@mui/material";
+import { Box, Pagination } from "@mui/material";
 
 export default function MovieList({ movieRoute, searchQuery }) {
     const [movies, setMovies] = React.useState([]);
     const [totalSearchResults, setTotalSearchResults] = React.useState(-1);
-    console.log(searchQuery);
+    const [totalPages, setTotalPages] = React.useState(-1);
 
     React.useEffect(() => {
-        async function getMovies() {
+        const getMovies = async () => {
             try {
-                if (searchQuery === "") {
-                    let response = await axios.get(movieRoute);
-                    console.log(response.data);
-                    setMovies(response.data.results);
-                    console.log(response.data.total_results);
-                } else {
-                    let response = await axios.get(movieRoute, {
-                        params: { query: searchQuery },
-                    });
-                    console.log(response.data);
-                    setMovies(response.data.results);
+                let params = {};
+
+                if (searchQuery) {
+                    params = { query: searchQuery };
+                }
+
+                const response = await axios.get(movieRoute, { params });
+
+                setMovies(response.data.results);
+
+                if (searchQuery) {
                     setTotalSearchResults(response.data.total_results);
+                    setTotalPages(response.data.total_pages);
                 }
             } catch (error) {
                 console.error("Error fetching movies:", error);
             }
-        }
+        };
+
         getMovies();
     }, [searchQuery]);
+
+    // Handle pagination changes and fetch new results
+    const handlePageChange = async (e, page) => {
+        console.log(e, page);
+        // try {
+        //     const response = await axios.get(
+        //         `http://localhost:3000/searchMovieByTitle/${searchValue}/${page}`
+        //     );
+        //     console.log(response.data);
+        //     navigate("/searchResults", {
+        //         state: {
+        //             searchResults: Object.entries(response.data.results),
+        //             responseData: response.data,
+        //             searchValue,
+        //         },
+        //     });
+        // } catch (error) {
+        //     console.error("Error getting new page data:", error);
+        // }
+    };
 
     return (
         <div>
@@ -46,10 +68,22 @@ export default function MovieList({ movieRoute, searchQuery }) {
                     return <MovieCard key={movie.id} movie={movie} />;
                 })}
             </Box>
-            <Box sx={{ textAlign: "center", mb: 2 }}>
+            <Box
+                justifyContent={"center"}
+                alignItems={"center"}
+                display={"flex"}
+            >
                 {totalSearchResults === -1
                     ? ""
                     : `${totalSearchResults} results`}
+                {totalPages === -1 ? (
+                    ""
+                ) : (
+                    <Pagination
+                        count={totalPages}
+                        onChange={handlePageChange}
+                    />
+                )}
             </Box>
         </div>
     );

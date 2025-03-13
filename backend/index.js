@@ -43,10 +43,14 @@ app.get("/api/movies/search", async (req, res) => {
             .status(400)
             .json({ error: "Missing required parameter: query" });
     }
+    let page = 1;
+    if (req.query.page) {
+        page = req.query.page;
+    }
     try {
         let query = req.query.query;
         let response = await axios.get(
-            `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US`,
+            `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=${page}`,
             {
                 headers: {
                     Authorization: `Bearer ${process.env.TMDB_API_TOKEN}`,

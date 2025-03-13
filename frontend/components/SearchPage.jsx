@@ -4,7 +4,7 @@ import MovieList from "./MovieList";
 export default function SearchPage() {
     const location = useLocation();
     const { searchTerm } = location.state || "";
-    console.log(searchTerm);
+
     return (
         <>
             <MovieList
@@ -14,5 +14,3 @@ export default function SearchPage() {
         </>
     );
 }
-
-//<MovieList movieRoute="http://localhost:8080/api/movies/trending" />

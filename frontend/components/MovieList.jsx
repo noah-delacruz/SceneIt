@@ -26,7 +26,7 @@ export default function MovieList({ movieRoute, searchQuery }) {
             }
         }
         getMovies();
-    }, []);
+    }, [searchQuery]);
 
     return (
         <div>

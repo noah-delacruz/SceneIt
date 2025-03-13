@@ -6,6 +6,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import SearchPage from "../components/SearchPage";
 
 function App() {
     const [darkMode, setDarkMode] = React.useState(true);
@@ -27,6 +28,7 @@ function App() {
                 <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
                 <Routes>
                     <Route path="/" element={<Home />} />
+                    <Route path="/search-results" element={<SearchPage />} />
                 </Routes>
                 <Footer />
             </BrowserRouter>

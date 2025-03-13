@@ -1,13 +1,17 @@
 import React from "react";
 import { Search, SearchIconWrapper, StyledInputBase } from "./NavbarStyles";
 import SearchIcon from "@mui/icons-material/Search";
+import { useNavigate } from "react-router-dom";
 
 export default function SearchBar() {
     const [searchTerm, setSearchTerm] = React.useState("");
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("Searching for movieTitle: " + searchTerm);
+
+        navigate("/search-results", { state: { searchTerm } });
     };
 
     return (

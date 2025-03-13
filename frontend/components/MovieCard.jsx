@@ -32,15 +32,18 @@ export default function MovieCard({ movie }) {
         // Return the formatted date string
         return `${month} ${day}, ${year}`;
     };
-
+    console.log(movie.backdrop_path);
     return (
         <>
             <Card sx={{ maxWidth: 350 }}>
                 <CardActionArea>
                     <CardMedia
                         component="img"
-                        height={{ width: "100%" }}
-                        image={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
+                        image={
+                            movie.backdrop_path
+                                ? `https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`
+                                : "https://image.tmdb.org/t/p/w500//4Xt8k4e6L1Zq2ykA6y2f3k2DDhR.jpg"
+                        }
                         alt={movie.title}
                     />
                     <CardContent>

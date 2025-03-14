@@ -1,20 +1,39 @@
 import { Button, TextField, Typography, Box } from "@mui/material";
 import React from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
-
+    const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(email);
         console.log(password);
-        let response = await axios.post("http://localhost:8080/api/users/", {
-            email,
-            password,
-        });
-        console.log(response);
+
+        try {
+            let response = await axios.post(
+                "http://localhost:8080/api/users/",
+                {
+                    email,
+                    password,
+                }
+            );
+            console.log(response);
+
+            // Get JWT token and store in local storage to persist auth and to use in subsequent API requests
+            const token = response.data.token;
+            if (token) {
+                localStorage.setItem("jwtToken", token);
+                // Redirect to home page
+                navigate("/");
+            }
+
+            // navigate("/details", { state: { movie: response.data } });
+        } catch (error) {
+            console.error("Failed to register: ", error);
+        }
     };
     return (
         <Box

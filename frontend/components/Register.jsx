@@ -1,14 +1,20 @@
 import { Button, TextField, Typography, Box } from "@mui/material";
 import React from "react";
+import axios from "axios";
 
 export default function Register() {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(email);
         console.log(password);
+        let response = await axios.post("http://localhost:8080/api/users/", {
+            email,
+            password,
+        });
+        console.log(response);
     };
     return (
         <Box

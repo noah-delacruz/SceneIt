@@ -8,6 +8,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import SearchPage from "../components/SearchPage";
 import MovieDetail from "../components/MovieDetail";
+import Register from "../components/Register";
 
 function App() {
     const [darkMode, setDarkMode] = React.useState(true);
@@ -33,7 +34,8 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/results" element={<SearchPage />} />
-                    <Route path="details" element={<MovieDetail />} />
+                    <Route path="/details" element={<MovieDetail />} />
+                    <Route path="/register" element={<Register />} />
                 </Routes>
                 <Footer />
             </BrowserRouter>

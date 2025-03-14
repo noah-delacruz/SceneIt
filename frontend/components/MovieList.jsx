@@ -1,16 +1,18 @@
 import React from "react";
 import axios from "axios";
 import MovieCard from "./MovieCard";
-import { Box, Pagination } from "@mui/material";
+import { Backdrop, Box, CircularProgress, Pagination } from "@mui/material";
 
 export default function MovieList({ movieRoute, searchQuery, timeframe }) {
     const [movies, setMovies] = React.useState([]);
     const [totalSearchResults, setTotalSearchResults] = React.useState(-1);
     const [totalPages, setTotalPages] = React.useState(-1);
+    const [loading, setLoading] = React.useState(true);
 
     React.useEffect(() => {
         const getMovies = async () => {
             try {
+                setLoading(true);
                 let params = {};
 
                 if (searchQuery) {
@@ -30,6 +32,8 @@ export default function MovieList({ movieRoute, searchQuery, timeframe }) {
                 }
             } catch (error) {
                 throw error;
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -46,6 +50,20 @@ export default function MovieList({ movieRoute, searchQuery, timeframe }) {
             throw error;
         }
     };
+
+    if (loading) {
+        return (
+            <Backdrop
+                sx={(theme) => ({
+                    color: "#fff",
+                    zIndex: theme.zIndex.drawer + 1,
+                })}
+                open={loading}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
+        );
+    }
 
     return (
         <div>

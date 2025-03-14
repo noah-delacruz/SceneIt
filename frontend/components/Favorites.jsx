@@ -8,9 +8,8 @@ export default function Favorites() {
     const navigate = useNavigate();
     const token = localStorage.getItem("jwtToken");
     const [favoriteMovies, setFavoriteMovies] = React.useState([]);
-    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080/";
-
     const [loading, setLoading] = React.useState(true);
+    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080/";
 
     const getFavorites = async () => {
         try {

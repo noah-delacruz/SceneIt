@@ -60,7 +60,7 @@ router.post("/api/users/login", async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) {
         return res.status(400).json({
-            error: "User not registered",
+            error: "Email is not registered",
         });
     }
 

@@ -1,17 +1,17 @@
-import { Button, TextField, Typography, Box } from "@mui/material";
-import React from "react";
+import { Button, TextField, Typography, Box, Alert } from "@mui/material";
+import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export default function Register() {
-    const [email, setEmail] = React.useState("");
-    const [password, setPassword] = React.useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
     const navigate = useNavigate();
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(email);
-        console.log(password);
-
+        setError("");
         try {
             let response = await axios.post(
                 "http://localhost:8080/api/users/",
@@ -20,21 +20,21 @@ export default function Register() {
                     password,
                 }
             );
-            console.log(response);
 
-            // Get JWT token and store in local storage to persist auth and to use in subsequent API requests
             const token = response.data.token;
             if (token) {
                 localStorage.setItem("jwtToken", token);
-                // Redirect to home page
                 navigate("/");
             }
-
-            // navigate("/details", { state: { movie: response.data } });
         } catch (error) {
-            console.error("Failed to register: ", error);
+            if (error.response) {
+                setError(error.response.data.error || "Invalid credentials");
+            } else {
+                setError("Something went wrong. Please try again.");
+            }
         }
     };
+
     return (
         <Box
             display="flex"
@@ -46,6 +46,7 @@ export default function Register() {
             <Typography variant="h3" gutterBottom>
                 Sign up for an account
             </Typography>
+            {error && <Alert severity="error">{error}</Alert>}
             <TextField
                 id="email"
                 label="Email address"

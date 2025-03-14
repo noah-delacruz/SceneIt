@@ -6,16 +6,14 @@ import MovieCard from "./MovieCard";
 export default function Favorites() {
     const token = localStorage.getItem("jwtToken");
     const [favoriteMovies, setFavoriteMovies] = React.useState([]);
+    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080/";
+
     const getFavorites = async () => {
-        let response = await axios.get(
-            "http://localhost:8080/api/users/favorites",
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            }
-        );
-        console.log(response.data);
+        let response = await axios.get(`${API_URL}api/users/favorites`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
         setFavoriteMovies(response.data);
     };
 

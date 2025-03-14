@@ -11,17 +11,14 @@ export default function MovieDetail() {
     const { movie } = location.state || {};
     const token = localStorage.getItem("jwtToken");
     const [favorited, setFavorited] = React.useState(false);
+    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080/";
 
     const getFavorites = async () => {
-        let response = await axios.get(
-            "http://localhost:8080/api/users/favorites",
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            }
-        );
-        console.log(response.data);
+        let response = await axios.get(`${API_URL}api/users/favorites`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
 
         // Check if the movie is already liked
         const isMovieFavorited = response.data.find(
@@ -45,9 +42,8 @@ export default function MovieDetail() {
     }
 
     const handleLikeClick = async () => {
-        console.log(movie);
         const response = await axios.post(
-            "http://localhost:8080/api/users/favorites",
+            `${API_URL}api/users/favorites`,
             {
                 movie,
             },
@@ -61,16 +57,12 @@ export default function MovieDetail() {
     };
 
     const handleRemoveLikeClick = async () => {
-        console.log(movie);
-        const response = await axios.delete(
-            "http://localhost:8080/api/users/favorites",
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-                data: { movie }, // Delete requests do not support passing movie in body. Must be placed inside a data object
-            }
-        );
+        const response = await axios.delete(`${API_URL}api/users/favorites`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            data: { movie }, // Delete requests do not support passing movie in body. Must be placed inside a data object
+        });
         setFavorited(false);
     };
 

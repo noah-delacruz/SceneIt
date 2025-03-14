@@ -9,13 +9,12 @@ import axios from "axios";
 
 export default function MovieCard({ movie }) {
     const navigate = useNavigate();
+    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080/";
 
     const handleClick = async () => {
         try {
             // Get detailed movie info to pass on to MovieDetail component
-            const response = await axios.get(
-                `http://localhost:8080/api/movie/${movie.id}`
-            );
+            const response = await axios.get(`${API_URL}api/movie/${movie.id}`);
             navigate("/details", { state: { movie: response.data } });
         } catch (error) {
             throw error;

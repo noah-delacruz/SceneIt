@@ -5,6 +5,8 @@ import React from "react";
 export default function Home() {
     const [timeframe, setTimeframe] = React.useState("day");
     const [todayButton, setTodayButton] = React.useState(true);
+    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080/";
+
     const handleTodayClick = () => {
         setTodayButton(true);
         setTimeframe("day");
@@ -39,7 +41,7 @@ export default function Home() {
                 )}
             </Typography>
             <MovieList
-                movieRoute="http://localhost:8080/api/movies/trending"
+                movieRoute={`${API_URL}api/movies/trending`}
                 searchQuery=""
                 timeframe={timeframe}
             />

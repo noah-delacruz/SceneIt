@@ -45,13 +45,17 @@ export default function Navbar({ darkMode, toggleDarkMode }) {
                         </Tooltip>
                     )}
                     <SearchBar />
-                    {/* <Link to="/login" className="no-link-style" sx:{{pl: 2}}>
+                    <Link
+                        to="/login"
+                        className="no-link-style"
+                        style={{ paddingLeft: "20px" }}
+                    >
                         Sign In
-                    </Link> */}
+                    </Link>
                     <Link
                         to="/register"
                         className="no-link-style"
-                        style={{ paddingLeft: "8px" }}
+                        style={{ paddingLeft: "20px" }}
                     >
                         Sign Up
                     </Link>

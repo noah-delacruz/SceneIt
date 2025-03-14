@@ -2,7 +2,7 @@ import { Button, TextField, Typography, Box } from "@mui/material";
 import React from "react";
 import axios from "axios";
 
-export default function Register() {
+export default function Login() {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
 
@@ -10,10 +10,13 @@ export default function Register() {
         e.preventDefault();
         console.log(email);
         console.log(password);
-        let response = await axios.post("http://localhost:8080/api/users/", {
-            email,
-            password,
-        });
+        let response = await axios.post(
+            "http://localhost:8080/api/users/login",
+            {
+                email,
+                password,
+            }
+        );
         console.log(response);
     };
     return (
@@ -25,7 +28,7 @@ export default function Register() {
             height="100vh"
         >
             <Typography variant="h3" gutterBottom>
-                Sign up for an account
+                Sign in to your account
             </Typography>
             <TextField
                 id="email"
@@ -46,9 +49,10 @@ export default function Register() {
                 sx={{ maxWidth: 400 }}
                 onChange={(e) => setPassword(e.target.value)}
             />
+
             <form onSubmit={handleSubmit}>
                 <Button type="submit" variant="contained" sx={{ mt: 2 }}>
-                    Sign Up
+                    Sign In
                 </Button>
             </form>
         </Box>

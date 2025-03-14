@@ -9,8 +9,7 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: [true, "Password must be of length 8 or greater"],
-        minlength: 8,
+        required: true,
     },
     favorites: {
         type: [{}],

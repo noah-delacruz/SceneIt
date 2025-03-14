@@ -9,6 +9,7 @@ import Footer from "../components/Footer";
 import SearchPage from "../components/SearchPage";
 import MovieDetail from "../components/MovieDetail";
 import Register from "../components/Register";
+import Login from "../components/Login";
 
 function App() {
     const [darkMode, setDarkMode] = React.useState(true);
@@ -36,6 +37,7 @@ function App() {
                     <Route path="/results" element={<SearchPage />} />
                     <Route path="/details" element={<MovieDetail />} />
                     <Route path="/register" element={<Register />} />
+                    <Route path="/login" element={<Login />} />
                 </Routes>
                 <Footer />
             </BrowserRouter>

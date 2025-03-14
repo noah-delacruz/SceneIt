@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../models/userModel.js";
 import protect from "../middleware/authMiddleware.js";
+import validator from "email-validator";
 
 const router = express.Router();
 
@@ -12,6 +13,14 @@ router.post("/api/users", async (req, res) => {
     if (!email || !password) {
         return res.status(400).json({
             error: "Missing required parameters: email and/or password",
+        });
+    }
+
+    // Check if email is valid
+    const isValidEmail = validator.validate(email);
+    if (!isValidEmail) {
+        return res.status(400).json({
+            error: "Not a valid email address",
         });
     }
 
@@ -53,6 +62,14 @@ router.post("/api/users/login", async (req, res) => {
     if (!email || !password) {
         return res.status(400).json({
             error: "Missing required parameters: email and/or password",
+        });
+    }
+
+    // Check if email is valid
+    const isValidEmail = validator.validate(email);
+    if (!isValidEmail) {
+        return res.status(400).json({
+            error: "Not a valid email address",
         });
     }
 

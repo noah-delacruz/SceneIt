@@ -16,6 +16,9 @@ A full stack website that allows users to search for movies by name using The Mo
 -   User authentication
 -   Add to favorites collection
 -   Error feedback during sign in/sign up
+-   Custom 404 Page
+-   Loading States
+-   Form validation
 
 ## Tech Stack
 

@@ -10,7 +10,6 @@ export default function MovieDetail() {
     const location = useLocation();
     const { movie } = location.state || {};
     const token = localStorage.getItem("jwtToken");
-    const [favorites, setFavorites] = React.useState([]);
     const [favorited, setFavorited] = React.useState(false);
 
     const getFavorites = async () => {
@@ -23,7 +22,6 @@ export default function MovieDetail() {
             }
         );
         console.log(response.data);
-        setFavorites(response.data);
 
         // Check if the movie is already liked
         const isMovieFavorited = response.data.find(

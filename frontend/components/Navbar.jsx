@@ -30,8 +30,17 @@ export default function Navbar({ darkMode, toggleDarkMode }) {
                         }}
                     >
                         <Link to="/" className="no-link-style">
-                            SceneIt
+                            Home
                         </Link>
+                        {token && (
+                            <Link
+                                to="/favorites"
+                                className="no-link-style"
+                                style={{ paddingLeft: "30px" }}
+                            >
+                                Favorites
+                            </Link>
+                        )}
                     </Typography>
                     {darkMode ? (
                         <Tooltip title="Light Mode">

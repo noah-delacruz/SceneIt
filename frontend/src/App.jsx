@@ -10,6 +10,7 @@ import SearchPage from "../components/SearchPage";
 import MovieDetail from "../components/MovieDetail";
 import Register from "../components/Register";
 import Login from "../components/Login";
+import Favorites from "../components/Favorites";
 
 function App() {
     const [darkMode, setDarkMode] = React.useState(true);
@@ -38,6 +39,7 @@ function App() {
                     <Route path="/details" element={<MovieDetail />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/favorites" element={<Favorites />} />
                 </Routes>
                 <Footer />
             </BrowserRouter>

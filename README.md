@@ -2,18 +2,20 @@
 
 A full stack website that allows users to search for movies by name using The Movie Database (TMDB) API. SceneIt provides the ability to discover trending movies, access detailed information about movies, and saving favorites to a collection.
 
-[SCREENSHOT HERE]
+![482126821_544283925349727_6524427605696279576_n](https://github.com/user-attachments/assets/0adc8bc1-1fba-4598-ac87-d065b49ed3a0)
+
 
 ## Features
 
 -   Movie search
--   View trending movies
+-   View trending movies for today or the week
 -   Click on movie for detailed information
 -   Search results counter
 -   Pagination
 -   Light/Dark mode theme toggle
 -   User authentication
 -   Add to favorites collection
+-   Error feedback during sign in/sign up
 
 ## Tech Stack
 
@@ -22,6 +24,7 @@ A full stack website that allows users to search for movies by name using The Mo
 -   **API**: The Movie Database (TMDB) API
 -   **Database**: MongoDB with Mongoose
 -   **Authentication**: JWT (JSON Web Tokens) with bcrypt for password hashing
+-   **Deployment**: Frontend deployed on Vercel and Backend/DB deployed on Render
 
 ## Getting Started
 

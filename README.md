@@ -1,6 +1,6 @@
 # SceneIt
 
-A full stack website that allows users to search for movies by name using The Movie Database (TMDB) API. SceneIt provides the ability to discover trending movies, access detailed information about movies, and saving favorites to a collection.
+A full stack website that allows users to search for movies by name using The Movie Database (TMDB) API. SceneIt provides the ability to discover trending movies, access detailed information about movies, and saving favorites to a collection. You can read more about my approach here: https://sceneit.hashnode.dev/sceneit-building-a-full-stack-movie-search-application-with-tmdb-api
 
 ![482126821_544283925349727_6524427605696279576_n](https://github.com/user-attachments/assets/0adc8bc1-1fba-4598-ac87-d065b49ed3a0)
 

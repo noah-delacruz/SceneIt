@@ -2,8 +2,10 @@ import React from "react";
 import axios from "axios";
 import { Box, Typography } from "@mui/material";
 import MovieCard from "./MovieCard";
+import { useNavigate } from "react-router-dom";
 
 export default function Favorites() {
+    const navigate = useNavigate();
     const token = localStorage.getItem("jwtToken");
     const [favoriteMovies, setFavoriteMovies] = React.useState([]);
     const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080/";
@@ -18,6 +20,9 @@ export default function Favorites() {
     };
 
     React.useEffect(() => {
+        if (!token) {
+            navigate("*");
+        }
         if (token) {
             getFavorites();
         }

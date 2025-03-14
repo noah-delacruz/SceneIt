@@ -37,7 +37,11 @@ export default function MovieDetail() {
 
     if (!movie) {
         return (
-            <Typography variant="h5">Movie details not available</Typography>
+            <Box sx={{ height: "100vh" }}>
+                <Typography sx={{ textAlign: "center" }} variant="h5">
+                    Movie details not available
+                </Typography>
+            </Box>
         );
     }
 

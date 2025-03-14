@@ -2,7 +2,6 @@ import express from "express";
 import axios from "axios";
 
 const router = express.Router();
-const TMDB_API_TOKEN = process.env.TMDB_API_TOKEN;
 
 // Get trending movies for the day
 // https://developer.themoviedb.org/reference/trending-movies

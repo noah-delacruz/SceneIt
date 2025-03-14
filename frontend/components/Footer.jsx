@@ -25,7 +25,7 @@ export default function Footer() {
                             <GitHubIcon fontSize="large" />
                         </a>
                         <a
-                            href="https://github.com/noah-delacruz/SceneIt"
+                            href="https://www.linkedin.com/in/noahdelacruz/"
                             target="_blank"
                             className="no-link-style"
                         >

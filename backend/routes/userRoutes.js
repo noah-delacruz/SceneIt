@@ -31,7 +31,7 @@ router.post("/api/users", async (req, res) => {
     const user = await User.create({
         email,
         password: hashedPassword,
-        favorites: [{}],
+        favorites: [],
     });
     if (!user) {
         return res.status(400).json({

@@ -144,7 +144,6 @@ router.post("/api/users/favorites", protect, async (req, res) => {
             favorites: user.favorites,
         });
     } catch (error) {
-        console.error(error);
         res.status(500).json({ message: "Server error" });
     }
 });

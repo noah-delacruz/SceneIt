@@ -11,6 +11,7 @@ import MovieDetail from "../components/MovieDetail";
 import Register from "../components/Register";
 import Login from "../components/Login";
 import Favorites from "../components/Favorites";
+import ScrollToTop from "../components/ScrollToTop";
 
 function App() {
     const [darkMode, setDarkMode] = React.useState(true);
@@ -32,6 +33,7 @@ function App() {
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
             <BrowserRouter>
+                <ScrollToTop />
                 <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
                 <Routes>
                     <Route path="/" element={<Home />} />

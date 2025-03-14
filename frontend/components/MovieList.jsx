@@ -7,7 +7,6 @@ export default function MovieList({ movieRoute, searchQuery, timeframe }) {
     const [movies, setMovies] = React.useState([]);
     const [totalSearchResults, setTotalSearchResults] = React.useState(-1);
     const [totalPages, setTotalPages] = React.useState(-1);
-    console.log(timeframe);
 
     React.useEffect(() => {
         const getMovies = async () => {
@@ -30,7 +29,7 @@ export default function MovieList({ movieRoute, searchQuery, timeframe }) {
                     setTotalPages(response.data.total_pages);
                 }
             } catch (error) {
-                console.error("Error fetching movies:", error);
+                throw error;
             }
         };
 
@@ -44,7 +43,7 @@ export default function MovieList({ movieRoute, searchQuery, timeframe }) {
             const response = await axios.get(movieRoute, { params });
             setMovies(response.data.results);
         } catch (error) {
-            console.error("Error getting new page data: ", error);
+            throw error;
         }
     };
 

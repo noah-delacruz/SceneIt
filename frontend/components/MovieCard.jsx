@@ -18,7 +18,7 @@ export default function MovieCard({ movie }) {
             );
             navigate("/details", { state: { movie: response.data } });
         } catch (error) {
-            console.error("Failed to fetch movie details: ", error);
+            throw error;
         }
     };
 

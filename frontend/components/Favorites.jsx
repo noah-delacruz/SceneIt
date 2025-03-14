@@ -28,9 +28,11 @@ export default function Favorites() {
     return (
         <>
             {favoriteMovies.length === 0 ? (
-                <Typography textAlign="center" variant="h3" sx={{ pt: 1 }}>
-                    No movies favorited
-                </Typography>
+                <Box height="100vh">
+                    <Typography textAlign="center" variant="h3" sx={{ pt: 1 }}>
+                        No movies favorited
+                    </Typography>
+                </Box>
             ) : (
                 <Box
                     sx={{

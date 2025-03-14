@@ -12,6 +12,7 @@ import Register from "../components/Register";
 import Login from "../components/Login";
 import Favorites from "../components/Favorites";
 import ScrollToTop from "../components/ScrollToTop";
+import NotFound from "../components/NotFound";
 
 function App() {
     const [darkMode, setDarkMode] = React.useState(true);
@@ -42,6 +43,7 @@ function App() {
                     <Route path="/register" element={<Register />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/favorites" element={<Favorites />} />
+                    <Route path="*" element={<NotFound />} />
                 </Routes>
                 <Footer />
             </BrowserRouter>

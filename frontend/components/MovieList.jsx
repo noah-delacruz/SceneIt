@@ -3,10 +3,11 @@ import axios from "axios";
 import MovieCard from "./MovieCard";
 import { Box, Pagination } from "@mui/material";
 
-export default function MovieList({ movieRoute, searchQuery, page }) {
+export default function MovieList({ movieRoute, searchQuery, timeframe }) {
     const [movies, setMovies] = React.useState([]);
     const [totalSearchResults, setTotalSearchResults] = React.useState(-1);
     const [totalPages, setTotalPages] = React.useState(-1);
+    console.log(timeframe);
 
     React.useEffect(() => {
         const getMovies = async () => {
@@ -14,7 +15,11 @@ export default function MovieList({ movieRoute, searchQuery, page }) {
                 let params = {};
 
                 if (searchQuery) {
-                    params = { query: searchQuery };
+                    params.query = searchQuery;
+                }
+
+                if (timeframe) {
+                    params.timeframe = timeframe;
                 }
 
                 const response = await axios.get(movieRoute, { params });
@@ -30,7 +35,7 @@ export default function MovieList({ movieRoute, searchQuery, page }) {
         };
 
         getMovies();
-    }, [searchQuery]);
+    }, [searchQuery, timeframe]);
 
     // Handle pagination changes and fetch new results
     const handlePageChange = async (e, page) => {

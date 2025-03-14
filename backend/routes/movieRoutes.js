@@ -3,12 +3,16 @@ import axios from "axios";
 
 const router = express.Router();
 
-// Get trending movies for the day
+// Get trending movies for the day or week
 // https://developer.themoviedb.org/reference/trending-movies
 router.get("/api/movies/trending", async (req, res) => {
+    let { timeframe } = req.query;
+    if (!timeframe) {
+        timeframe = "day";
+    }
     try {
         let response = await axios.get(
-            "https://api.themoviedb.org/3/trending/movie/day?language=en-US",
+            `https://api.themoviedb.org/3/trending/movie/${timeframe}?language=en-US`,
             {
                 headers: {
                     Authorization: `Bearer ${process.env.TMDB_API_TOKEN}`,

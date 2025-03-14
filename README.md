@@ -7,7 +7,7 @@ A full stack website that allows users to search for movies by name using The Mo
 ## Features
 
 -   Movie search
--   View trending
+-   View trending movies
 -   Click on movie for detailed information
 -   Search results counter
 -   Pagination

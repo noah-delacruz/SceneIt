@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Box, Typography } from "@mui/material";
+import { Backdrop, Box, CircularProgress, Typography } from "@mui/material";
 import MovieCard from "./MovieCard";
 import { useNavigate } from "react-router-dom";
 
@@ -10,13 +10,22 @@ export default function Favorites() {
     const [favoriteMovies, setFavoriteMovies] = React.useState([]);
     const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080/";
 
+    const [loading, setLoading] = React.useState(true);
+
     const getFavorites = async () => {
-        let response = await axios.get(`${API_URL}api/users/favorites`, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
-        setFavoriteMovies(response.data);
+        try {
+            setLoading(true);
+            let response = await axios.get(`${API_URL}api/users/favorites`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            setFavoriteMovies(response.data);
+        } catch (error) {
+            throw error;
+        } finally {
+            setLoading(false);
+        }
     };
 
     React.useEffect(() => {
@@ -27,6 +36,20 @@ export default function Favorites() {
             getFavorites();
         }
     }, [token]);
+
+    if (loading) {
+        return (
+            <Backdrop
+                sx={(theme) => ({
+                    color: "#fff",
+                    zIndex: theme.zIndex.drawer + 1,
+                })}
+                open={loading}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
+        );
+    }
 
     return (
         <>

@@ -104,7 +104,9 @@ export default function MovieDetail() {
                         </Typography>
                         <Typography variant="body1" sx={{ pt: 1 }}>
                             {movie.vote_average
-                                ? `${movie.vote_average * 10}% User Score`
+                                ? `${Math.round(
+                                      movie.vote_average * 10
+                                  )}% User Score`
                                 : "No rating available"}
                         </Typography>
                         {movie.tagline && (

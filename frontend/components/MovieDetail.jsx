@@ -12,6 +12,7 @@ export default function MovieDetail() {
     const token = localStorage.getItem("jwtToken");
     const [favorited, setFavorited] = React.useState(false);
     const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080/";
+    console.log(movie.genre);
 
     const getFavorites = async () => {
         let response = await axios.get(`${API_URL}api/users/favorites`, {
@@ -100,11 +101,21 @@ export default function MovieDetail() {
                         ) : null}
 
                         <Typography variant="body1" sx={{ pt: 1 }}>
-                            {formatDate(movie.release_date)} •{" "}
-                            {movie.genres
-                                ?.map((genre) => genre.name)
-                                .join(", ")}{" "}
-                            • {convertRuntime(movie.runtime)}
+                            {movie.release_date === ""
+                                ? "Unknown release date"
+                                : formatDate(movie.release_date)}{" "}
+                            •{" "}
+                            {movie.genre === undefined ? (
+                                "Unknown genre"
+                            ) : (
+                                <>
+                                    {movie.genres
+                                        ?.map((genre) => genre.name)
+                                        .join(", ")}
+                                </>
+                            )}{" "}
+                            {" • "}
+                            {convertRuntime(movie.runtime)}
                         </Typography>
                         <Typography variant="body1" sx={{ pt: 1 }}>
                             {movie.vote_average

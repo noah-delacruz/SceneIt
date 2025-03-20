@@ -38,7 +38,9 @@ export default function MovieCard({ movie }) {
                             variant="body4"
                             sx={{ color: "text.disabled", pb: 2 }}
                         >
-                            {formatDate(movie.release_date)}
+                            {movie.release_date === ""
+                                ? "Unknown release date"
+                                : formatDate(movie.release_date)}
                         </Typography>
                         <Typography
                             variant="body2"

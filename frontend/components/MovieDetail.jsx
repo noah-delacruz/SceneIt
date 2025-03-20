@@ -12,7 +12,7 @@ export default function MovieDetail() {
     const token = localStorage.getItem("jwtToken");
     const [favorited, setFavorited] = React.useState(false);
     const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080/";
-    console.log(movie.genre);
+    console.log(movie.overview);
 
     const getFavorites = async () => {
         let response = await axios.get(`${API_URL}api/users/favorites`, {
@@ -140,7 +140,9 @@ export default function MovieDetail() {
                             Overview
                         </Typography>
                         <Typography variant="body1">
-                            {movie.overview}
+                            {movie.overview === ""
+                                ? "Unknown overview"
+                                : movie.overview}
                         </Typography>
                     </Container>
                 </Grid>

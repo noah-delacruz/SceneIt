@@ -47,7 +47,9 @@ export default function MovieCard({ movie }) {
                             sx={{ color: "text.secondary" }}
                             className="movie-description"
                         >
-                            {movie.overview}
+                            {movie.overview === ""
+                                ? "Unknown overview"
+                                : movie.overview}
                         </Typography>
                     </CardContent>
                 </CardActionArea>
